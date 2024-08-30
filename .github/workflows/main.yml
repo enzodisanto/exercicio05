@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-go:
-    name: Build Go
+    name: Build Go 
     runs-on: ubuntu-latest
     steps:
 
@@ -28,7 +28,18 @@ jobs:
     - name: Build ${{ env.FILE_NAME }} for windows-latest
       run: GOOS=windows GOARCH=amd64 go build ${{ env.FILE_NAME }}.go
 
+  test-step:
+    name: Test Go Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+      - uses: n8maninger/action-golang-test@v1
+    needs: 
+      - build-go
+
   upload-artifacts:
+    name: Upload Artifacts
     runs-on: ubuntu-latest
     steps:
       - name: Upload artifact for linux
@@ -44,5 +55,7 @@ jobs:
           path: ./${{ env.FILE_NAME }}.exe
     needs: 
       - build-go
+      - test-step
+      
 
     
