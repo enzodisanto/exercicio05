@@ -16,7 +16,7 @@ jobs:
     steps:
 
     - name: Checkout Go Code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
     - name: Build ${{ env.FILE_NAME }} for ubuntu-latest
       run: go build ${{ env.FILE_NAME }}.go
