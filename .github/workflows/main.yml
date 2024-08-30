@@ -31,16 +31,30 @@ jobs:
   test-step:
     name: Test Go Build
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-      - uses: n8maninger/action-golang-test@v1
     needs: 
-      - build-go
+     - build-go
+    steps:
+    
+    - name: Checkout Go Code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'  # Substitua pela versão do Go que você está usando
+
+    - name: Initialize Go Modules
+      run: go mod tidy
+
+    - name: Run Go Tests
+      uses: n8maninger/action-golang-test@v1
 
   upload-artifacts:
     name: Upload Artifacts
     runs-on: ubuntu-latest
+    needs: 
+      - build-go
+      - test-step
     steps:
       - name: Upload artifact for linux
         uses: actions/upload-artifact@v4
@@ -53,9 +67,7 @@ jobs:
         with:
           name: windows
           path: ./${{ env.FILE_NAME }}.exe
-    needs: 
-      - build-go
-      - test-step
+    
       
 
     
