@@ -8,7 +8,7 @@ on:
     - main
 
 env:
-  FILE_NAME: helloserver
+  FILE_NAME: hello-server
 
 jobs:
   build-go:
