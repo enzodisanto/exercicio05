@@ -28,16 +28,21 @@ jobs:
     - name: Build ${{ env.FILE_NAME }} for windows-latest
       run: GOOS=windows GOARCH=amd64 go build ${{ env.FILE_NAME }}.go
 
-    - name: Upload artifact for linux
-      uses: actions/upload-artifact@v4
-      with:
-        name: linux
-        path: ./${{ env.FILE_NAME }}
-
-    - name: Upload artifact for windows
-      uses: actions/upload-artifact@v4
-      with:
-        name: windows
-        path: ./${{ env.FILE_NAME }}.exe
+  upload-artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload artifact for linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: ./${{ env.FILE_NAME }}
+        
+      - name: Upload artifact for windows
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: ./${{ env.FILE_NAME }}.exe
+    needs: 
+      - build-go
 
     
