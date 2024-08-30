@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  FILE_NAME: "Hello Server"
+  FILE_NAME: hello-server
 
 jobs:
   build-go:
