@@ -53,11 +53,11 @@ jobs:
         run: ls -la 
 
       - name: Make run.sh executable
-        run: chmod +x ./run.sh
+        run: chmod 755 ./run.sh
       
       - name: Verify permission after command chmod
         run: ls -la run.sh
-        
+
       - name: Run Script
         run: ./run.sh
 
