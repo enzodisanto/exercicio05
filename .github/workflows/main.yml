@@ -50,11 +50,14 @@ jobs:
         run: pwd
 
       - name: List files in current directory
-        run: ls -la
+        run: ls -la 
 
       - name: Make run.sh executable
         run: chmod +x ./run.sh
-
+      
+      - name: Verify permission after command chmod
+        run: ls -la run.sh
+        
       - name: Run Script
         run: ./run.sh
 
