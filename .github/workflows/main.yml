@@ -46,6 +46,9 @@ jobs:
         with:
           name: linux
 
+      - name: Verify path
+        run: pwd
+
       - name: List files in current directory
         run: ls -la
 
